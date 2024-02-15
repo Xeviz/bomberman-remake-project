@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://c466sjjhyl0qo"]
+
+[ext_resource type="Script" path="res://Bomb.gd" id="1_lcohs"]
+[ext_resource type="Texture2D" uid="uid://cr6n5vnjmsw01" path="res://game_tile_map/bomberman_tile_map.png" id="2_27i84"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilk6x"]
+atlas = ExtResource("2_27i84")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bks66"]
+atlas = ExtResource("2_27i84")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkuvf"]
+atlas = ExtResource("2_27i84")
+region = Rect2(100, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nmkm"]
+atlas = ExtResource("2_27i84")
+region = Rect2(150, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0fys"]
+atlas = ExtResource("2_27i84")
+region = Rect2(200, 50, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_830nq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilk6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bks66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkuvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nmkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0fys")
+}],
+"loop": false,
+"name": &"placed_bomb",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63nvj"]
+size = Vector2(38, 37)
+
+[node name="Bomb" type="CharacterBody2D"]
+script = ExtResource("1_lcohs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_830nq")
+animation = &"placed_bomb"
+autoplay = "placed_bomb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_63nvj")
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

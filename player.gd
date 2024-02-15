@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 300.0
+var speed = 100.0
 var bombs_limit = 1
 var bombs_placed_amount = 0
 
@@ -58,58 +58,60 @@ func generate_explosion(exploding_bomb, explosion_range):
 	
 	
 	
-	for g in range(explosion_range):
+	for g in range(1, explosion_range+1):
 		
 		if blocked_right == false:
-			var right_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x+1, pos_y))
+			var right_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x+g, pos_y))
 			if right_block == Vector2i(0,2):
-				mapped_explosion.set_cell(0, Vector2i(pos_x+1, pos_y), 1, Vector2i(1, 3), 0)
-				tilemap.set_cell(1, Vector2i(pos_x+1, pos_y), -1, Vector2i(-1, -1), -1)
+				mapped_explosion.set_cell(0, Vector2i(pos_x+g, pos_y), 1, Vector2i(1, 3), 0)
+				tilemap.set_cell(1, Vector2i(pos_x+g, pos_y), -1, Vector2i(-1, -1), -1)
 				blocked_right = true
 			elif right_block == Vector2i(4,0):
 				blocked_right = true
 			else:
-				mapped_explosion.set_cell(0, Vector2i(pos_x+1, pos_y), 1, Vector2i(1, 3), 0)
+				mapped_explosion.set_cell(0, Vector2i(pos_x+g, pos_y), 1, Vector2i(1, 3), 0)
 				
 		if blocked_left == false:
-			var left_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x-1, pos_y))
+			var left_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x-g, pos_y))
 			if left_block == Vector2i(0,2):
-				mapped_explosion.set_cell(0, Vector2i(pos_x-1, pos_y), 1, Vector2i(1, 3), 0)
-				tilemap.set_cell(1, Vector2i(pos_x-1, pos_y), -1, Vector2i(-1, -1), -1)
+				mapped_explosion.set_cell(0, Vector2i(pos_x-g, pos_y), 1, Vector2i(1, 3), 0)
+				tilemap.set_cell(1, Vector2i(pos_x-g, pos_y), -1, Vector2i(-1, -1), -1)
 				blocked_left = true
 			elif left_block == Vector2i(4,0):
-				blocked_right = true
+				blocked_left = true
 			else:
-				mapped_explosion.set_cell(0, Vector2i(pos_x-1, pos_y), 1, Vector2i(1, 3), 0)
+				mapped_explosion.set_cell(0, Vector2i(pos_x-g, pos_y), 1, Vector2i(1, 3), 0)
 		
 		if blocked_up == false:
-			var up_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y+1))
+			var up_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y+g))
 			if up_block == Vector2i(0,2):
-				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+1), 1, Vector2i(0, 3), 0)
-				tilemap.set_cell(1, Vector2i(pos_x, pos_y+1), -1, Vector2i(-1, -1), -1)
+				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+g), 1, Vector2i(0, 3), 0)
+				tilemap.set_cell(1, Vector2i(pos_x, pos_y+g), -1, Vector2i(-1, -1), -1)
 				blocked_up = true
 			elif up_block == Vector2i(4,0):
 				blocked_up = true
 			else:
-				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+1), 1, Vector2i(0, 3), 0)
+				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+g), 1, Vector2i(0, 3), 0)
 		
 		if blocked_down == false:
-			var down_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y-1))
+			var down_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y-g))
 			if down_block == Vector2i(0,2):
-				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-1), 1, Vector2i(0, 3), 0)
-				tilemap.set_cell(1, Vector2i(pos_x, pos_y-1), -1, Vector2i(-1, -1), -1)
+				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
+				tilemap.set_cell(1, Vector2i(pos_x, pos_y-g), -1, Vector2i(-1, -1), -1)
 				blocked_down = true
 			elif down_block == Vector2i(4,0):
 				blocked_down = true
 			else:
-				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-1), 1, Vector2i(0, 3), 0)
+				mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
 		
 	get_tree().root.get_node("GameRoom").add_child(mapped_explosion)
 
 func refill_bomb():
 	bombs_placed_amount-=1
 		
-		
+func get_player_position_on_map():
+	return tilemap.local_to_map(position)
+
 func _process(delta):
 	
 	var direction = 0

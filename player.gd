@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var DESTRUCTIBLE_BLOCKS = [Vector2i(0,2), Vector2i(1,2), Vector2i(2,2), Vector2i(3,2), Vector2i(4,2)]
 var speed = 100.0
+var bombs_range = 1
 var bombs_limit = 1
 var bombs_placed_amount = 0
 var player_map_position = Vector2i(0,0)
@@ -12,6 +13,14 @@ var alive = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var tilemap = get_tree().root.get_node("GameRoom").get_node("GameMap")
 
+func upgrade_speed():
+	speed += 50.0
+
+func upgrade_amount():
+	bombs_limit += 1
+
+func upgrade_range():
+	bombs_range += 1
 
 func change_facing_direction():
 	if Input.is_action_pressed("ui_left"):
@@ -42,6 +51,7 @@ func place_bomb():
 	if Input.is_action_just_pressed("bomb_placed") and bombs_placed_amount < bombs_limit:
 		var player_bomb = preload("res://Bomb.tscn").instantiate()
 		var spawn_position = tilemap.map_to_local(player_map_position)
+		player_bomb.bomb_range = bombs_range
 		get_tree().root.add_child(player_bomb)
 		player_bomb.global_position = spawn_position
 		bombs_placed_amount+=1

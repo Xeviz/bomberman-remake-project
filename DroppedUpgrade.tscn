@@ -43,14 +43,17 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54iw3"]
-radius = 13.9284
+radius = 20.2237
 
 [node name="DroppedUpgrade" type="CharacterBody2D"]
+z_index = -1
 script = ExtResource("1_4nemb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_up88x")
 animation = &"range"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["UpgradesGroup"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_54iw3")

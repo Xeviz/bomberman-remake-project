@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var time_to_explode = 2
-var bomb_range = 2
+var bomb_range = 1
 var player_name = "1"
 
 

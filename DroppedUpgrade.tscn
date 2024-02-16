@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdv1u1n00k6gp"]
+
+[ext_resource type="Script" path="res://DroppedUpgrade.gd" id="1_4nemb"]
+[ext_resource type="Texture2D" uid="uid://cr6n5vnjmsw01" path="res://game_tile_map/bomberman_tile_map.png" id="2_cspk6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hshr0"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(0, 200, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdoqs"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(50, 200, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7rms"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(100, 200, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_up88x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hshr0")
+}],
+"loop": true,
+"name": &"amount",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdoqs")
+}],
+"loop": true,
+"name": &"range",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7rms")
+}],
+"loop": true,
+"name": &"speed",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54iw3"]
+radius = 13.9284
+
+[node name="DroppedUpgrade" type="CharacterBody2D"]
+script = ExtResource("1_4nemb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_up88x")
+animation = &"range"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_54iw3")

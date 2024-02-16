@@ -4,3 +4,6 @@ res://GameRoom.tscn
 res://Bomb.tscn
 res://ExplosionMap.tscn
 res://Player.gd
+res://GameMap.gd
+res://DroppedUpgrade.tscn
+res://DroppedUpgrade.gd

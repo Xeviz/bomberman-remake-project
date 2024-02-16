@@ -1,7 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://6osj3xvro270"]
+[gd_scene load_steps=12 format=3 uid="uid://6osj3xvro270"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_3xplh"]
 [ext_resource type="Texture2D" uid="uid://crqgu8i6tmh0s" path="res://player_animation/full_animation.png" id="2_5gcw2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mve3e"]
+atlas = ExtResource("2_5gcw2")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38srd"]
+atlas = ExtResource("2_5gcw2")
+region = Rect2(0, 50, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0llo6"]
 atlas = ExtResource("2_5gcw2")
@@ -27,6 +35,17 @@ region = Rect2(200, 0, 50, 50)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mve3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38srd")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0llo6")
 }, {
 "duration": 1.0,
@@ -46,8 +65,8 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8fyq"]
-size = Vector2(88, 88)
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sbme"]
+radius = 43.1741
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
@@ -64,6 +83,6 @@ autoplay = "Default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_r8fyq")
+shape = SubResource("CircleShape2D_4sbme")
 
 [node name="BombSpawner" type="Node2D" parent="."]

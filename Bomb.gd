@@ -18,8 +18,6 @@ func check_if_explode():
 		
 func detect_if_turn_on_collision():
 	var player_pos = get_tree().root.get_node("GameRoom").get_node(player_name).get_player_position_on_map()
-	print(player_pos.x)
-	print(position.x)
 	if(player_pos.x != int(position.x/50) or player_pos.y != int(position.y/50)):
 		get_node("CollisionShape2D").disabled = false
 

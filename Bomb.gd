@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var time_to_explode = 2
 var bomb_range = 1
-var player_name = "1"
+var player_name = "2"
 
 
 
@@ -17,7 +17,7 @@ func check_if_explode():
 		queue_free()
 		
 func detect_if_turn_on_collision():
-	var player_pos = get_tree().root.get_node("GameRoom").get_node(player_name).get_player_position_on_map()
+	var player_pos = get_tree().root.get_node("GameRoom").get_node(str(player_name)).get_player_position_on_map()
 	if(player_pos.x != int(position.x/50) or player_pos.y != int(position.y/50)):
 		get_node("CollisionShape2D").disabled = false
 
@@ -32,6 +32,6 @@ func _process(delta):
 
 func _on_tree_exiting():
 	
-	get_tree().root.get_node("GameRoom").get_node(player_name).refill_bomb()
-	get_tree().root.get_node("GameRoom").get_node(player_name).generate_explosion(self, bomb_range)
+	get_tree().root.get_node("GameRoom").get_node(str(player_name)).refill_bomb()
+	get_tree().root.get_node("GameRoom").get_node(str(player_name)).generate_explosion(self, bomb_range)
 	

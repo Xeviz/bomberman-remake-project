@@ -1,5 +1,5 @@
 extends CharacterBody2D
-var type = randi_range(0,2)
+var type
 var bodies = []
 
 func _ready():

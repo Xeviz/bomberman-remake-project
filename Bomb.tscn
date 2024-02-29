@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c466sjjhyl0qo"]
+[gd_scene load_steps=11 format=3 uid="uid://c466sjjhyl0qo"]
 
 [ext_resource type="Script" path="res://Bomb.gd" id="1_lcohs"]
 [ext_resource type="Texture2D" uid="uid://cr6n5vnjmsw01" path="res://game_tile_map/bomberman_tile_map.png" id="2_27i84"]
@@ -49,6 +49,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63nvj"]
 size = Vector2(38, 37)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_txtf0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Bomb" type="CharacterBody2D"]
 script = ExtResource("1_lcohs")
 
@@ -60,6 +65,9 @@ autoplay = "placed_bomb"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_63nvj")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_txtf0")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

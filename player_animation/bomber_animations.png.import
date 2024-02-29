@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvms0bhm4tskn"
-path="res://.godot/imported/idle_1.png-0e0633c9e82cf4bb37fef87a70f3793f.ctex"
+uid="uid://ch25betntn1q5"
+path="res://.godot/imported/bomber_animations.png-ab839080e6aa949de589406262b61d1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player_animation/idle_1.png"
-dest_files=["res://.godot/imported/idle_1.png-0e0633c9e82cf4bb37fef87a70f3793f.ctex"]
+source_file="res://player_animation/bomber_animations.png"
+dest_files=["res://.godot/imported/bomber_animations.png-ab839080e6aa949de589406262b61d1e.ctex"]
 
 [params]
 

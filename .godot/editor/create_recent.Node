@@ -1,3 +1,4 @@
+AudioStreamPlayer2D
 MultiplayerSynchronizer
 Node2D
 Node
@@ -11,4 +12,3 @@ CollisionShape2D
 Sprite2D
 CharacterBody2D
 TileMap
-StaticBody2D

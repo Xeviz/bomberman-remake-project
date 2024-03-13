@@ -50,7 +50,8 @@ func send_player_information(name, id):
 		GameManager.players[id] = {
 			"name":name,
 			"id":id,
-			"score": 0
+			"score": 0,
+			"map_position": Vector2i(0,0)
 		}
 	if multiplayer.is_server():
 		for i in GameManager.players:

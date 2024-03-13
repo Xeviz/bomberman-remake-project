@@ -12,14 +12,17 @@ var current_animation = "idle"
 
 
 
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var tilemap = get_tree().root.get_node("GameRoom").get_node("GameMap")
+@onready var placing_bomb_sound = $PlacingBombSound
 @export var bomb : PackedScene
 @export var explosion_map : PackedScene
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	placing_bomb_sound.volume_db = -5
 
 func upgrade_speed():
 	speed += 50.0
@@ -52,8 +55,8 @@ func get_movement(delta):
 	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
 		velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * speed
 		global_position += velocity * delta
-		print(global_position)
-		print(name)
+		#print(global_position)
+		#print(name)
 		move_and_slide()
 	player_map_position = tilemap.local_to_map(global_position)
 	
@@ -65,11 +68,14 @@ func _enter_tree():
 func try_to_place_bomb():
 	if Input.is_action_just_pressed("bomb_placed") and bombs_placed_amount < bombs_limit:
 		bombs_placed_amount+=1
+		placing_bomb_sound.play()
 		var spawn_position = tilemap.map_to_local(player_map_position)
 		place_bomb.rpc(spawn_position, bombs_range)
 		
 @rpc("any_peer", "call_local")
 func place_bomb(spawn_pos, range):
+	for i in GameManager.players:
+		print(GameManager.players[i].name)
 	var player_bomb = bomb.instantiate()
 	player_bomb.global_position = spawn_pos
 	player_bomb.bomb_range = range
@@ -181,14 +187,16 @@ func generate_explosion(exploding_bomb, explosion_range):
 @rpc("any_peer","call_local")
 func generate_explosion_for_others(explosion_atlas, explosion_cords):
 	var mapped_explosion = explosion_map.instantiate()
-	player_map_position = tilemap.local_to_map(position)
+	var explosion_sound = $ExplosionSound
+	add_child(explosion_sound)
+	explosion_sound.play()
 	for i in range(len(explosion_atlas)):
 		var block = tilemap.get_cell_atlas_coords(1, explosion_cords[i])
-		if explosion_cords[i] == player_map_position:
-			print("pozycja wybuchu:" + str(explosion_cords[i]))
-			print("Pozycja gracza:" + str(player_map_position))
-			die()
-		elif block in DESTRUCTIBLE_BLOCKS:
+		for g in GameManager.players:
+			if GameManager.players[g].map_position == explosion_cords[i]:
+				print("ktoś zdechł " , GameManager.players[g].id)
+				get_tree().root.get_node("GameRoom").get_node(str(GameManager.players[g].id)).die()
+		if block in DESTRUCTIBLE_BLOCKS:
 			tilemap.destroy_cell(explosion_cords[i])
 		mapped_explosion.set_cell(0, explosion_cords[i], 1, explosion_atlas[i], 0)
 	get_tree().root.get_node("GameRoom").add_child(mapped_explosion)
@@ -198,8 +206,17 @@ func refill_bomb():
 		
 func get_player_position_on_map():
 	return player_map_position
+	
+func send_my_position_to_manager():
+	for i in GameManager.players:
+		if(str(GameManager.players[i].id) == name):
+			GameManager.players[i].map_position = get_player_position_on_map()
+			
+			
 
 func die():
+	current_animation = "death_animation"
+	get_node("AnimatedSprite2D").play(current_animation)
 	alive = false
 	
 
@@ -210,6 +227,7 @@ func _process(delta):
 			get_movement(delta)
 			change_facing_direction()
 			try_to_place_bomb()
+			send_my_position_to_manager()
 		else:
 			get_node("CollisionShape2D").disabled = true 
 		

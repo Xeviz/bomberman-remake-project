@@ -1,9 +1,44 @@
-[gd_scene load_steps=32 format=3 uid="uid://6osj3xvro270"]
+[gd_scene load_steps=43 format=3 uid="uid://6osj3xvro270"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_3xplh"]
 [ext_resource type="PackedScene" uid="uid://c466sjjhyl0qo" path="res://Bomb.tscn" id="2_i1vf6"]
 [ext_resource type="Texture2D" uid="uid://2jset24l22pk" path="res://player_animation/test_idle.png" id="3_f38qp"]
 [ext_resource type="PackedScene" uid="uid://dga40w4xytwjt" path="res://ExplosionMap.tscn" id="3_gqmrg"]
+[ext_resource type="Texture2D" uid="uid://ch25betntn1q5" path="res://player_animation/bomber_animations.png" id="4_gjv4m"]
+[ext_resource type="AudioStream" uid="uid://csj8vjajeo71i" path="res://audio/explosion.mp3" id="6_jewpf"]
+[ext_resource type="AudioStream" uid="uid://go2wsmkdds5y" path="res://audio/placing2.mp3" id="7_vlsdy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rneu3"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eev82"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkwlm"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nb7r"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agwov"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(200, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maqmu"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(250, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6tph"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(300, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37ktf"]
+atlas = ExtResource("4_gjv4m")
+region = Rect2(350, 0, 50, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lti8i"]
 atlas = ExtResource("3_f38qp")
@@ -103,6 +138,35 @@ region = Rect2(50, 100, 50, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mnq2v"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rneu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eev82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkwlm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nb7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agwov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maqmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6tph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37ktf")
+}],
+"loop": true,
+"name": &"death_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lti8i")
@@ -224,7 +288,7 @@ visibility_layer = 15
 texture_filter = 1
 position = Vector2(1.78814e-07, 1.78814e-07)
 sprite_frames = SubResource("SpriteFrames_mnq2v")
-animation = &"down_animation"
+animation = &"death_animation"
 autoplay = "idle_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -234,3 +298,9 @@ shape = SubResource("RectangleShape2D_smuhh")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qwio6")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_jewpf")
+
+[node name="PlacingBombSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_vlsdy")

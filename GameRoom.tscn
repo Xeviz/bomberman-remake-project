@@ -125,7 +125,7 @@ drop_upgrade = ExtResource("5_rrymf")
 position = Vector2(127, 725)
 
 [node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawn"]]
-position = Vector2(124, 774)
+position = Vector2(1423, 730)
 
 [node name="2" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawn"]]
 position = Vector2(125, 127)

@@ -9,6 +9,7 @@ func _ready():
 	var index = 0
 	for i in GameManager.players:
 		var current_player = player_scene.instantiate()
+		current_player.z_index = 0
 		current_player.name = str(GameManager.players[i].id)
 		add_child(current_player)
 		for spawn in get_tree().get_nodes_in_group("PlayerSpawn"):

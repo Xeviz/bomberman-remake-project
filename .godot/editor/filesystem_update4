@@ -1,11 +1,9 @@
-res://default_bus_layout.tres
-res://MultiplayerRoom.tscn
+res://GameRoom.tscn
 res://Bomb.gd
 res://Control.gd
-res://Player.gd
-res://GameRoom.tscn
 res://Bomb.tscn
 res://ExplosionMap.tscn
 res://DroppedUpgrade.tscn
 res://player.tscn
-res://SceneManager.gd
+res://MultiplayerRoom.tscn
+res://Player.gd

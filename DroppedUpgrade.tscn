@@ -1,45 +1,108 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdv1u1n00k6gp"]
+[gd_scene load_steps=17 format=3 uid="uid://bdv1u1n00k6gp"]
 
 [ext_resource type="Script" path="res://DroppedUpgrade.gd" id="1_4nemb"]
 [ext_resource type="Texture2D" uid="uid://cr6n5vnjmsw01" path="res://game_tile_map/bomberman_tile_map.png" id="2_cspk6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hshr0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mspr7"]
 atlas = ExtResource("2_cspk6")
 region = Rect2(0, 200, 50, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mdoqs"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kifng"]
 atlas = ExtResource("2_cspk6")
 region = Rect2(50, 200, 50, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i7rms"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w83hn"]
 atlas = ExtResource("2_cspk6")
 region = Rect2(100, 200, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmnda"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(150, 200, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2leb0"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(0, 300, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12kin"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(50, 300, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jk6n"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(100, 300, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qph4"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(150, 300, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5tm0"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(0, 250, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_176ou"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(50, 250, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pytht"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(100, 250, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8qid"]
+atlas = ExtResource("2_cspk6")
+region = Rect2(150, 250, 50, 50)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_up88x"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hshr0")
+"texture": SubResource("AtlasTexture_mspr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kifng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w83hn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmnda")
 }],
 "loop": true,
 "name": &"amount",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mdoqs")
+"texture": SubResource("AtlasTexture_2leb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12kin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jk6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qph4")
 }],
 "loop": true,
 "name": &"range",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i7rms")
+"texture": SubResource("AtlasTexture_v5tm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_176ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pytht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8qid")
 }],
 "loop": true,
 "name": &"speed",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_54iw3"]
@@ -51,7 +114,7 @@ script = ExtResource("1_4nemb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_up88x")
-animation = &"range"
+animation = &"speed"
 
 [node name="Area2D" type="Area2D" parent="." groups=["UpgradesGroup"]]
 

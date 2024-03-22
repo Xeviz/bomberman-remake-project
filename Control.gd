@@ -4,14 +4,25 @@ extends Control
 @export var port = 8910
 var peer
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
+	if "--server" in OS.get_cmdline_args():
+		host_game()
+		
+func host_game():
+	peer = ENetMultiplayerPeer.new()
+	var error = peer.create_server(port, 2)
+	if error != OK:
+		print("couldn't host - " + error)
+		return
+	multiplayer.set_multiplayer_peer(peer)
+	print("Waiting for another player")
+	send_player_information($LineEdit.text, multiplayer.get_unique_id())
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
@@ -29,14 +40,7 @@ func connection_failed():
 	print ("Connection failed!")
 
 func _on_host_button_down():
-	peer = ENetMultiplayerPeer.new()
-	var error = peer.create_server(port, 2)
-	if error != OK:
-		print("couldn't host - " + error)
-		return
-	multiplayer.set_multiplayer_peer(peer)
-	print("Waiting for another player")
-	send_player_information($LineEdit.text, multiplayer.get_unique_id())
+	host_game()
 	
 
 func _on_join_button_down():

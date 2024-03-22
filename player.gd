@@ -25,7 +25,7 @@ func _ready():
 	placing_bomb_sound.volume_db = -5
 
 func upgrade_speed():
-	speed += 50.0
+	speed += 25.0
 
 func upgrade_amount():
 	bombs_limit += 1

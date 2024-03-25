@@ -17,20 +17,31 @@ var current_animation = "idle"
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var tilemap = get_tree().root.get_node("GameRoom").get_node("GameMap")
 @onready var placing_bomb_sound = $PlacingBombSound
+@onready var explosion_sound = $ExplosionSound
+@onready var pick_up_sound = $PickUpSound
 @export var bomb : PackedScene
 @export var explosion_map : PackedScene
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	placing_bomb_sound.volume_db = -5
+	pick_up_sound.volume_db = -10
+
+func play_pick_up_sound():
+	var new_pick_up_sound = pick_up_sound.duplicate()
+	add_child(new_pick_up_sound)
+	new_pick_up_sound.play()
 
 func upgrade_speed():
+	play_pick_up_sound()
 	speed += 25.0
 
 func upgrade_amount():
+	play_pick_up_sound()
 	bombs_limit += 1
 
 func upgrade_range():
+	play_pick_up_sound()
 	bombs_range += 1
 
 func change_facing_direction():
@@ -187,9 +198,9 @@ func generate_explosion(exploding_bomb, explosion_range):
 @rpc("any_peer","call_local")
 func generate_explosion_for_others(explosion_atlas, explosion_cords):
 	var mapped_explosion = explosion_map.instantiate()
-	var explosion_sound = $ExplosionSound
-	add_child(explosion_sound)
-	explosion_sound.play()
+	var new_explosion_sound = explosion_sound.duplicate()
+	add_child(new_explosion_sound)
+	new_explosion_sound.play()
 	for i in range(len(explosion_atlas)):
 		var block = tilemap.get_cell_atlas_coords(1, explosion_cords[i])
 		for g in GameManager.players:

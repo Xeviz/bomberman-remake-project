@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://6osj3xvro270"]
+[gd_scene load_steps=44 format=3 uid="uid://6osj3xvro270"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_3xplh"]
 [ext_resource type="PackedScene" uid="uid://c466sjjhyl0qo" path="res://Bomb.tscn" id="2_i1vf6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ch25betntn1q5" path="res://player_animation/bomber_animations.png" id="4_gjv4m"]
 [ext_resource type="AudioStream" uid="uid://csj8vjajeo71i" path="res://audio/explosion.mp3" id="6_jewpf"]
 [ext_resource type="AudioStream" uid="uid://go2wsmkdds5y" path="res://audio/placing2.mp3" id="7_vlsdy"]
+[ext_resource type="AudioStream" uid="uid://dofm6fw5xny5o" path="res://audio/pickupitem.mp3" id="8_bphqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rneu3"]
 atlas = ExtResource("4_gjv4m")
@@ -304,3 +305,6 @@ stream = ExtResource("6_jewpf")
 
 [node name="PlacingBombSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_vlsdy")
+
+[node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_bphqv")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c466sjjhyl0qo"]
+[gd_scene load_steps=12 format=3 uid="uid://c466sjjhyl0qo"]
 
 [ext_resource type="Script" path="res://Bomb.gd" id="1_lcohs"]
 [ext_resource type="Texture2D" uid="uid://cr6n5vnjmsw01" path="res://game_tile_map/bomberman_tile_map.png" id="2_27i84"]
+[ext_resource type="AudioStream" uid="uid://csj8vjajeo71i" path="res://audio/explosion.mp3" id="3_rlj35"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilk6x"]
 atlas = ExtResource("2_27i84")
@@ -68,6 +69,9 @@ shape = SubResource("RectangleShape2D_63nvj")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_txtf0")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rlj35")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

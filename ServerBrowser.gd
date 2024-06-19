@@ -10,7 +10,7 @@ var broadcaster : PacketPeerUDP
 var listner : PacketPeerUDP
 @export var listen_port : int = 8911
 @export var broadcast_port : int = 8912
-@export var broadcast_address : String = '192.168.71.255'
+@export var broadcast_address : String = '10.182.255.255' # 192.168.71.255
 @export var server_info : PackedScene
 
 

@@ -1,6 +1,6 @@
 extends Control
 
-@export var address = "192.168.68.102"
+@export var address = "10.182.22.210" #192.168.68.102
 @export var port = 8910
 var peer
 
@@ -71,9 +71,6 @@ func _on_host_button_down():
 	send_player_information($LineEdit.text, multiplayer.get_unique_id())
 	$ServerBrowser.set_up_broadcast($LineEdit.text + "'s server")
 	
-
-func _on_join_button_down():
-	join_by_ip(address)
 	
 func join_by_ip(ip):
 	peer = ENetMultiplayerPeer.new()

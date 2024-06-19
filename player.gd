@@ -98,7 +98,6 @@ func generate_explosion(exploding_bomb, explosion_range):
 	var map_spawn_position = tilemap.local_to_map(exploding_bomb.global_position)
 	var pos_x = map_spawn_position.x
 	var pos_y = map_spawn_position.y
-	#mapped_explosion.set_cell(0, map_spawn_position, 1, Vector2i(3, 3), 0)
 	var blocked_left = false
 	var blocked_right = false
 	var blocked_up = false
@@ -115,84 +114,63 @@ func generate_explosion(exploding_bomb, explosion_range):
 		if blocked_right == false:
 			var right_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x+g, pos_y))
 			if right_block in DESTRUCTIBLE_BLOCKS:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x+g, pos_y), 1, Vector2i(1, 3), 0)
-				#tilemap.destroy_cell(Vector2i(pos_x+g, pos_y))
 				blocked_right = true
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x+g, pos_y))
 			elif right_block == Vector2i(4,0):
 				blocked_right = true
 			elif Vector2i(pos_x+g, pos_y) == player_map_position:
-				#die()
-				#mapped_explosion.set_cell(0, Vector2i(pos_x+g, pos_y), 1, Vector2i(1, 3), 0)
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x+g, pos_y))
 			else:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x+g, pos_y), 1, Vector2i(1, 3), 0)
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x+g, pos_y))
 				
 		if blocked_left == false:
 			var left_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x-g, pos_y))
 			if left_block in DESTRUCTIBLE_BLOCKS:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x-g, pos_y), 1, Vector2i(1, 3), 0)
-				#tilemap.destroy_cell(Vector2i(pos_x-g, pos_y))
 				blocked_left = true
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x-g, pos_y))
 			elif left_block == Vector2i(4,0):
 				blocked_left = true
 			elif Vector2i(pos_x-g, pos_y) == player_map_position:
-				#die()
-				#mapped_explosion.set_cell(0, Vector2i(pos_x-g, pos_y), 1, Vector2i(1, 3), 0)
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x-g, pos_y))
 			else:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x-g, pos_y), 1, Vector2i(1, 3), 0)
 				explosion_cells.append(Vector2i(1, 3))
 				explosion_coords.append(Vector2i(pos_x-g, pos_y))
 		
 		if blocked_up == false:
 			var up_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y+g))
 			if up_block in DESTRUCTIBLE_BLOCKS:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+g), 1, Vector2i(0, 3), 0)
-				#tilemap.destroy_cell(Vector2i(pos_x, pos_y+g))
 				blocked_up = true
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y+g))
 			elif up_block == Vector2i(4,0):
 				blocked_up = true
 			elif Vector2i(pos_x, pos_y-g) == player_map_position:
-				#die()
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y+g))
 			else:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y+g), 1, Vector2i(0, 3), 0)
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y+g))
 		
 		if blocked_down == false:
 			var down_block = tilemap.get_cell_atlas_coords(1, Vector2i(pos_x, pos_y-g))
 			if down_block in DESTRUCTIBLE_BLOCKS:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
-				#tilemap.destroy_cell(Vector2i(pos_x, pos_y-g))
 				blocked_down = true
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y-g))
 			elif down_block == Vector2i(4,0):
 				blocked_down = true
 			elif Vector2i(pos_x, pos_y-g) == player_map_position:
-				#die()
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y-g))
 			else:
-				#mapped_explosion.set_cell(0, Vector2i(pos_x, pos_y-g), 1, Vector2i(0, 3), 0)
 				explosion_cells.append(Vector2i(0, 3))
 				explosion_coords.append(Vector2i(pos_x, pos_y-g))
 	generate_explosion_for_others.rpc(explosion_cells, explosion_coords)
-	#get_tree().root.get_node("GameRoom").add_child(mapped_explosion)
 	
 
 @rpc("any_peer","call_local")

@@ -1,10 +1,7 @@
-res://GameRoom.tscn
+res://player.tscn
 res://Bomb.gd
 res://Control.gd
-res://DroppedUpgrade.gd
-res://Player.gd
-res://Bomb.tscn
-res://ExplosionMap.tscn
-res://DroppedUpgrade.tscn
-res://player.tscn
+res://ServerBrowser.gd
+res://server_info.tscn
 res://MultiplayerRoom.tscn
+res://GameRoom.tscn

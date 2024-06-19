@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci441ktm0cgb2"]
+[gd_scene load_steps=4 format=3 uid="uid://ci441ktm0cgb2"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_cmr3p"]
+[ext_resource type="Script" path="res://ServerBrowser.gd" id="2_mdgwd"]
+[ext_resource type="PackedScene" uid="uid://ctrdlfootvkv1" path="res://server_info.tscn" id="3_vlxi3"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -41,6 +43,62 @@ offset_right = 286.0
 offset_bottom = 41.0
 placeholder_text = "name"
 
+[node name="ServerBrowser" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_mdgwd")
+server_info = ExtResource("3_vlxi3")
+
+[node name="BroadcastTimer" type="Timer" parent="ServerBrowser"]
+
+[node name="Label" type="Label" parent="ServerBrowser"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 10.0
+offset_right = 644.0
+offset_bottom = 33.0
+text = "Bound to Listen port:"
+
+[node name="Panel" type="Panel" parent="ServerBrowser"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 156.0
+offset_right = 742.0
+offset_bottom = 466.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerBrowser/Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 702.0
+offset_bottom = 269.0
+
+[node name="ServerInfo2" type="HBoxContainer" parent="ServerBrowser/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="ServerBrowser/Panel/VBoxContainer/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+
+[node name="Ip" type="Label" parent="ServerBrowser/Panel/VBoxContainer/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Address"
+
+[node name="PlayerCount" type="Label" parent="ServerBrowser/Panel/VBoxContainer/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "players"
+
+[node name="Empty" type="Label" parent="ServerBrowser/Panel/VBoxContainer/ServerInfo2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "
+"
+
 [connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
 [connection signal="button_down" from="Join" to="." method="_on_join_button_down"]
 [connection signal="button_down" from="Start" to="." method="_on_start_button_down"]
+[connection signal="timeout" from="ServerBrowser/BroadcastTimer" to="ServerBrowser" method="_on_broadcast_timer_timeout"]

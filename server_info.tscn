@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctrdlfootvkv1"]
+
+[ext_resource type="Script" path="res://ServerInfo.gd" id="1_y2yam"]
+
+[node name="ServerInfo" type="HBoxContainer"]
+script = ExtResource("1_y2yam")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "IP Address"
+
+[node name="Ip" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "255.255.255.255"
+
+[node name="PlayerCount" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Join"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

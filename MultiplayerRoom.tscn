@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci441ktm0cgb2"]
+[gd_scene load_steps=6 format=3 uid="uid://ci441ktm0cgb2"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_cmr3p"]
+[ext_resource type="PackedScene" uid="uid://cf5rn5d8gvsu6" path="res://end_game_screen.tscn" id="2_j2a2r"]
 [ext_resource type="Script" path="res://ServerBrowser.gd" id="2_mdgwd"]
 [ext_resource type="PackedScene" uid="uid://ctrdlfootvkv1" path="res://server_info.tscn" id="3_vlxi3"]
+[ext_resource type="AudioStream" uid="uid://cqev1aphk57uo" path="res://audio/background_music.mp3" id="4_nx3xo"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_cmr3p")
+end_game_screen = ExtResource("2_j2a2r")
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -97,6 +100,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "
 "
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nx3xo")
 
 [connection signal="button_down" from="Host" to="." method="_on_host_button_down"]
 [connection signal="button_down" from="Join" to="." method="_on_join_button_down"]

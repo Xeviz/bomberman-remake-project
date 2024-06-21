@@ -1,3 +1,7 @@
+LineEdit
+TextEdit
+AudioStreamPlayer
+AudioStreamPlayer2D
 Button
 Label
 HBoxContainer
@@ -5,10 +9,6 @@ VBoxContainer
 Panel
 Timer
 Control
-AudioStreamPlayer2D
 MultiplayerSynchronizer
 Node2D
 Node
-LineEdit
-MultiplayerSpawner
-Area2D

@@ -305,6 +305,8 @@ stream = ExtResource("6_jewpf")
 
 [node name="PlacingBombSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_vlsdy")
+bus = &"Effects"
 
 [node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_bphqv")
+bus = &"Effects"

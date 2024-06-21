@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cf5rn5d8gvsu6"]
+
+[node name="EndGameScreen" type="Node2D"]
+z_index = 155
+
+[node name="LineEdit" type="LineEdit" parent="."]
+z_index = 155
+offset_right = 1542.0
+offset_bottom = 850.0
+text = "Congratulations! You've won!"
+alignment = 1

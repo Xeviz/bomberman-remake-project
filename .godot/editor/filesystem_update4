@@ -1,7 +1,7 @@
 res://player.tscn
 res://Bomb.gd
 res://Control.gd
-res://ServerBrowser.gd
-res://server_info.tscn
 res://MultiplayerRoom.tscn
 res://GameRoom.tscn
+res://end_game_screen.tscn
+res://Player.gd

@@ -173,22 +173,33 @@ func generate_explosion(exploding_bomb, explosion_range):
 	generate_explosion_for_others.rpc(explosion_cells, explosion_coords)
 	
 
-@rpc("any_peer","call_local")
+@rpc("any_peer", "call_local")
 func generate_explosion_for_others(explosion_atlas, explosion_cords):
 	var mapped_explosion = explosion_map.instantiate()
 	var new_explosion_sound = explosion_sound.duplicate()
 	add_child(new_explosion_sound)
 	new_explosion_sound.play()
+
 	for i in range(len(explosion_atlas)):
 		var block = tilemap.get_cell_atlas_coords(1, explosion_cords[i])
-		for g in GameManager.players:
+		for g in GameManager.players.keys():
 			if GameManager.players[g].map_position == explosion_cords[i]:
-				print("ktoś zdechł " , GameManager.players[g].id)
-				get_tree().root.get_node("GameRoom").get_node(str(GameManager.players[g].id)).die()
+				print("ktoś zdechł ", GameManager.players[g].id)
+				rpc("player_died", GameManager.players[g].id)
+				GameManager.players.erase(g)
 		if block in DESTRUCTIBLE_BLOCKS:
 			tilemap.destroy_cell(explosion_cords[i])
 		mapped_explosion.set_cell(0, explosion_cords[i], 1, explosion_atlas[i], 0)
+		
 	get_tree().root.get_node("GameRoom").add_child(mapped_explosion)
+
+@rpc("any_peer", "call_local")
+func player_died(player_id):
+	if GameManager.players.has(player_id):
+		print("Synchronizing player death: ", player_id)
+		GameManager.players.erase(player_id)
+		get_tree().root.get_node("GameRoom").get_node(str(player_id)).die()
+
 
 func refill_bomb():
 	bombs_placed_amount-=1
@@ -207,6 +218,7 @@ func die():
 	current_animation = "death_animation"
 	get_node("AnimatedSprite2D").play(current_animation)
 	alive = false
+	
 	
 
 func _process(delta):

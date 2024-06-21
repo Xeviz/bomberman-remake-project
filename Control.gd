@@ -1,7 +1,11 @@
 extends Control
 
-@export var address = "10.182.22.210" #192.168.68.102
+@export var end_game_screen : PackedScene
+@onready var background_music = $BackgroundMusic
+@export var address = "169.254.43.59" #192.168.68.102
 @export var port = 8910
+var game_started = 0
+var game_finished = 0
 var peer
 
 func _ready():
@@ -15,7 +19,11 @@ func _ready():
 	$ServerBrowser.join_game.connect(join_by_ip)
 		
 func _process(delta):
-	pass
+	if GameManager.players.size() == 1 and game_finished == 0 and game_started == 1:
+		game_finished = 1
+		var game_over = end_game_screen.instantiate()
+		get_tree().root.add_child(game_over)
+		
 
 func peer_connected(id):
 	print("Player connected " + str(id))
@@ -50,8 +58,10 @@ func send_player_information(name, id):
 	
 @rpc("any_peer", "call_local")
 func start_game():
+	game_started = 1
 	var scene = load("res://GameRoom.tscn").instantiate()
 	get_tree().root.add_child(scene)
+	background_music.play()
 	self.hide()
 
 func host_game():
